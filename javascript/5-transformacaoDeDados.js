@@ -1,5 +1,15 @@
 // Transformação de dados para testes
 
+// .toString() x String() - converte qualquer valor para string
+const numero = 42
+console.log('Número como string com toString():', numero.toString())
+console.log('Número como string com String():', String(numero))
+
+// String() é mais seguro, pois não quebra se o valor for null ou undefined.
+// toString() quebra se o valor for null ou undefined, pois não existe um método toString() para esses valores.
+console.log('Número como string com String():', String(null))
+console.log('Número como string com String():', String(undefined))
+
 // trim() remove espaços no início e no fim.
 // Muito útil ao validar textos extraídos de uma página.
 const nomeDaPagina = '  Zelda  '
@@ -23,7 +33,7 @@ console.log(
 ) // true
 
 // split(), reverse() e join() formatam uma data recebida de uma API.
-// Lembrando que o reverser inverte a ordem dos elementos de um array original.
+// Diferente das strings, reverse() reorganiza o próprio array em vez de criar outro.
 const dataIso = '2027-03-14'
 const dataFormatada = dataIso.split('-').reverse().join('/')
 
@@ -34,14 +44,14 @@ console.log('Com replace():', 'Zelda-Link-Shulk'.replace('-', '/')) // Zelda/Lin
 console.log('Com replaceAll():', 'Zelda-Link-Shulk'.replaceAll('-', '/')) // Zelda/Link/Shulk
 
 // Limpeza de preço exibido na página e conversão para número.
-const precoNaPagina = 'R$ 2.450,75'
+const precoNaPagina = 'R$ 3.470,80'
 const precoComoNumero = Number(
 	precoNaPagina.replace('R$ ', '').replaceAll('.', '').replace(',', '.')
 )
 
 console.log('Preço como número:', precoComoNumero) // 2450.75
 console.log('Preço correto:', precoComoNumero === 2450.75) // true
-
+    
 // slice() extrai partes específicas de uma string.
 console.log('Ano:', dataIso.slice(0, 4)) // 2026
 console.log('Dia:', dataIso.slice(-2)) // 27
@@ -50,3 +60,9 @@ console.log('Dia:', dataIso.slice(-2)) // 27
 const quantidade = 108
 console.log('Quantidade como texto:', String(quantidade))
 console.log('Tipo:', typeof String(quantidade)) // string
+
+/*
+Observações gerais:
+Essa inconsistência é real e infeliz. Métodos de string copiam; o reverse() e mais alguns métodos de array não. 
+Na dúvida, imprima o original depois e veja.
+*/
